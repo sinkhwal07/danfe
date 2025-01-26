@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-conten padding-y bg-light">
+  <div class="container">
+    <div class="row">
+      {% include 'includes/dashboard_sidebar.html' %}
+      
+      <main class="col-md-9">
+        <article class="card shadow-lg">
+          <header class="card-header bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h4 class="mb-0">Welcome, {{ user.full_name }}</h4>
+                <small>Stay updated with your profile and orders</small>
+              </div>
+              <img 
+                src="{{ userprofile.profile_picture.url }}" 
+                alt="User Profile Picture" 
+                class="rounded-circle" 
+                width="60" 
+                height="60">
+            </div>
+          </header>
+
+          <div class="card-body">
+            <div class="row text-center g-3">
+              <!-- Total Orders Card -->
+              <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                  <div class="card-body">
+                    <h5 class="card-title text-muted">
+                      <i class="fas fa-shopping-cart text-primary"></i> Total Orders
+                    </h5>
+                    <h2 class="text-dark">{{ orders_count }}</h2>
+                    <a href="{% url 'my_orders' %}" class="btn btn-primary btn-sm mt-2">
+                      View Orders
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- User Info Card -->
+              <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                  <div class="card-body text-center">
+                    <h5 class="card-title text-muted">
+                      <i class="fas fa-user text-primary"></i> Your Details
+                    </h5>
+                    <p class="text-dark mb-1"><strong>Email:</strong> {{ user.email }}</p>
+                    <p class="text-dark mb-1"><strong>Phone:</strong> {{ user.phone_number }}</p>
+                    <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary btn-sm mt-2">
+                      Edit Profile
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </main>
+    </div> <!-- row -->
+  </div> <!-- container -->
+</section>
+
+<!-- Optional Styles for Additional Touch -->
+<style>
+  .card-header {
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+  .card {
+    border-radius: 1rem;
+  }
+  .btn {
+    border-radius: 2rem;
+  }
+  .g-3 {
+    gap: 1.5rem;
+  }
+</style>
+{% endblock %}
